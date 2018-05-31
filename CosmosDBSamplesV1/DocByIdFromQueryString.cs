@@ -11,9 +11,11 @@ namespace CosmosDBSamplesV1
     public static class DocByIdFromQueryString
     {
         [FunctionName("DocByIdFromQueryString")]
-        public static async Task<HttpResponseMessage> Run(
+        public static HttpResponseMessage Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req,
-            [DocumentDB("ToDoItems", "Items", ConnectionStringSetting = "CosmosDBConnection", Id = "{Query.id}")] ToDoItem toDoItem,
+            [DocumentDB("ToDoItems", "Items", 
+                ConnectionStringSetting = "CosmosDBConnection", 
+                Id = "{Query.id}")] ToDoItem toDoItem,
             TraceWriter log)
         {
             log.Info("C# HTTP trigger function processed a request.");

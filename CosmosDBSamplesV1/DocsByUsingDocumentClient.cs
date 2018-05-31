@@ -16,7 +16,8 @@ namespace CosmosDBSamplesV1
         [FunctionName("DocsByUsingDocumentClient")]
         public static async Task<HttpResponseMessage> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req,
-            [DocumentDB("ToDoItems", "Items", ConnectionStringSetting = "CosmosDBConnection")] DocumentClient client,
+            [DocumentDB("ToDoItems", "Items", 
+                ConnectionStringSetting = "CosmosDBConnection")] DocumentClient client,
             TraceWriter log)
         {
             log.Info("C# HTTP trigger function processed a request.");

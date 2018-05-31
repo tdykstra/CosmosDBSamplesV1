@@ -1,8 +1,5 @@
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
-using System.Web.Http;
-using System.Web.Mvc;
 
 namespace CosmosDBSamplesV1
 {
@@ -22,7 +19,9 @@ namespace CosmosDBSamplesV1
         [FunctionName("DocByIdFromPOCO")]
         public static void Run(
             [QueueTrigger("todoqueueforlookup")] ToDoItemLookup toDoItemLookup,
-            [DocumentDB("ToDoItems", "Items", ConnectionStringSetting = "CosmosDBConnection", Id = "{ToDoItemId}")]ToDoItem toDoItem,
+            [DocumentDB("ToDoItems", "Items", 
+                ConnectionStringSetting = "CosmosDBConnection", 
+                Id = "{ToDoItemId}")]ToDoItem toDoItem,
             TraceWriter log)
         {
             log.Info($"C# Queue trigger function processed Id={toDoItemLookup?.ToDoItemId}");
