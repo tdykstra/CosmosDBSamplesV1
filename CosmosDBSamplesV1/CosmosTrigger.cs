@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
+using System.Collections.Generic;
 
 namespace CosmosDBSamplesV1
 {

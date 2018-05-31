@@ -3,17 +3,6 @@ using Microsoft.Azure.WebJobs.Host;
 
 namespace CosmosDBSamplesV1
 {
-    public class ToDoItemLookup
-    {
-        public string ToDoItemId { get; set; }
-    }
-
-    public class ToDoItem
-    {
-        public string Id { get; set; }
-        public string Description { get; set; }
-    }
-
     public static class DocByIdFromPOCO
     {
         [FunctionName("DocByIdFromPOCO")]
