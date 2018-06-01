@@ -13,7 +13,9 @@ namespace CosmosDBSamplesV1
         public static HttpResponseMessage Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", 
                 Route = "todoitems2/{id}")]HttpRequestMessage req,
-            [DocumentDB("ToDoItems", "Items", 
+            [DocumentDB(
+                databaseName: "ToDoItems",
+                collectionName: "Items",
                 ConnectionStringSetting = "CosmosDBConnection", 
                 SqlQuery = "select * from ToDoItems r where r.id = {id}")] IEnumerable<ToDoItem> toDoItems,
             TraceWriter log)

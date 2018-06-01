@@ -10,10 +10,15 @@ namespace CosmosDBSamplesV1
     public static class DocsBySqlQuery
     {
         [FunctionName("DocsBySqlQuery")]
-        public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req,
-            [DocumentDB("ToDoItems", "Items", 
+        public static HttpResponseMessage Run(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]
+                HttpRequestMessage req,
+            [DocumentDB(
+                databaseName: "ToDoItems",
+                collectionName: "Items",
                 ConnectionStringSetting = "CosmosDBConnection", 
-                SqlQuery = "SELECT top 2 * FROM c order by c._ts desc")]IEnumerable<ToDoItem> toDoItems,
+                SqlQuery = "SELECT top 2 * FROM c order by c._ts desc")]
+                IEnumerable<ToDoItem> toDoItems,
             TraceWriter log)
         {
             log.Info("C# HTTP trigger function processed a request.");

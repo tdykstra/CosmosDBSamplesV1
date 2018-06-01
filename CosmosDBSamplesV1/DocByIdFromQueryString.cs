@@ -11,7 +11,9 @@ namespace CosmosDBSamplesV1
         [FunctionName("DocByIdFromQueryString")]
         public static HttpResponseMessage Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req,
-            [DocumentDB("ToDoItems", "Items", 
+            [DocumentDB(
+                databaseName: "ToDoItems",
+                collectionName: "Items",
                 ConnectionStringSetting = "CosmosDBConnection", 
                 Id = "{Query.id}")] ToDoItem toDoItem,
             TraceWriter log)

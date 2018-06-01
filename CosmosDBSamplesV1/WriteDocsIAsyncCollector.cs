@@ -9,11 +9,14 @@ namespace CosmosDBSamplesV1
         [FunctionName("WriteDocsIAsyncCollector")]
         public static async Task Run(
             [QueueTrigger("todoqueueforwritemulti")] ToDoItem[] toDoItemsIn,
-            [DocumentDB("ToDoItems", "Items", 
-                ConnectionStringSetting = "CosmosDBConnection")] IAsyncCollector<ToDoItem> toDoItemsOut,
+            [DocumentDB(
+                databaseName: "ToDoItems",
+                collectionName: "Items",
+                ConnectionStringSetting = "CosmosDBConnection")]
+                IAsyncCollector<ToDoItem> toDoItemsOut,
             TraceWriter log)
         {
-            log.Info($"C# Queue trigger function processed {toDoItemsIn?.Length} To Do items");
+            log.Info($"C# Queue trigger function processed {toDoItemsIn?.Length} items");
 
             foreach (ToDoItem toDoItem in toDoItemsIn)
             {

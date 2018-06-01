@@ -1,5 +1,6 @@
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
+using System;
 
 namespace CosmosDBSamplesV1
 {
@@ -7,14 +8,17 @@ namespace CosmosDBSamplesV1
     {
         [FunctionName("WriteDocFromPOCO")]
         public static void Run(
-            [QueueTrigger("todoqueueforwrite")] ToDoItem toDoItem,
-            [DocumentDB("ToDoItems","Items", 
+            [QueueTrigger("todoqueueforwrite")] string queueMessage,
+            [DocumentDB(
+                databaseName: "ToDoItems",
+                collectionName: "Items",
                 ConnectionStringSetting = "CosmosDBConnection")]out dynamic document,
             TraceWriter log)
         {
-            log.Info($"C# Queue trigger function processed Id={toDoItem?.Id}, Description={toDoItem.Description}");
+            document = new { Description = queueMessage, id = Guid.NewGuid() };
 
-            document = toDoItem;
+            log.Info($"C# Queue trigger function inserted one row");
+            log.Info($"Description={queueMessage}");
         }
     }
 }
