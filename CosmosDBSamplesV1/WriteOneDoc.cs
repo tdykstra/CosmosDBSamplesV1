@@ -4,9 +4,9 @@ using System;
 
 namespace CosmosDBSamplesV1
 {
-    public static class WriteDocFromPOCO
+    public static class WriteOneDoc
     {
-        [FunctionName("WriteDocFromPOCO")]
+        [FunctionName("WriteOneDoc")]
         public static void Run(
             [QueueTrigger("todoqueueforwrite")] string queueMessage,
             [DocumentDB(
